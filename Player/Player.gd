@@ -27,7 +27,9 @@ func _unhandled_input(event):
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -mouse_range, mouse_range)
 
 func die():
-	queue_free()
+	rpc_unreliable("_set_position", global_transform.origin)
+	rpc_unreliable("_set_rotation", rotation.y)
+	rpc_unreliable("_die")
 
 func get_input():
 	var input_dir = Vector3.ZERO
